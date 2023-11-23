@@ -9,12 +9,23 @@ public class lineComp {
         this.y2=y2;
     }
     /**
-     * @name: equals
-     * @return/ o/p: true if the lines are equal, false otherwise
+     * @name: calculateLength
+     * @return/ o/p: Length of the line.
+     */
+    public double calculateLength() {
+        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+    }
+
+    /**
+     * @name: compareTo
+     * @i/p: other - the other line
+     * @return/ o/p: 0 if  equal, +ve no if line1 is greater, -ve no if line2 is greater.
      */
 
-    public boolean equals(lineComp other) {
-        return this.x1 == other.x1 && this.y1 == other.y1 && this.x2 == other.x2 && this.y2 == other.y2;
+    public int compareTo(lineComp line2) {
+        double thisLength = calculateLength();
+        double line2Length = line2.calculateLength();
+        return Double.compare(thisLength, line2Length);
     }
 
     public static void main(String[] args) {
@@ -41,10 +52,13 @@ public class lineComp {
 
         lineComp line2 = new lineComp(x1Line2, y1Line2, x2Line2, y2Line2);
 
-        if (line1.equals(line2)) {
-            System.out.println("Lines are equal.");
+        int result = line1.compareTo(line2);
+        if (result == 0) {
+            System.out.println("Lines are equal");
+        } else if (result > 0) {
+            System.out.println("Line 1 is greater");
         } else {
-            System.out.println("Lines are not equal.");
+            System.out.println("Line 2 is greater");
         }
 
         scanner.close();
